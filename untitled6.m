@@ -2,12 +2,49 @@
 lena = imread('Imagens/lenaMenor.bmp');
 cameraman = imread('Imagens/cameraman.bmp');
 
-% Redimensionar as imagens para altura de 256 pixels mantendo a proporção
-lena_redimensionada = imresize(lena, [256 NaN]);
-cameraman_redimensionada = imresize(cameraman, [256 NaN]);
+% Obter dimensões das imagens originais
+[h1, w1, c1] = size(lena);
+[h2, w2, c2] = size(cameraman);
 
-% Criar uma nova imagem concatenando as duas horizontalmente
-imagem_combinada = [lena_redimensionada, cameraman_redimensionada];
+% Definir altura da nova imagem
+alturaNova = 256;
 
-% Salvar a nova imagem
-imwrite(imagem_combinada, 'imagem_combinada.png');
+% Calcular largura proporcional para manter aspecto de cada imagem
+larguraNova1 = round(w1 * (alturaNova / h1));
+larguraNova2 = round(w2 * (alturaNova / h2));
+
+% Criar terceira imagem vazia
+numCanais = max(c1, c2);
+larguraCombinada = larguraNova1 + larguraNova2;
+imagemCombinada = zeros(alturaNova, larguraCombinada, numCanais, 'uint8');
+
+% Preencher a primeira parte com pixels da primeira imagem (redimensionando manualmente)
+for i = 1:alturaNova
+    for j = 1:larguraNova1
+        orig_i = round(i * (h1 / alturaNova));
+        orig_j = round(j * (w1 / larguraNova1));
+        if orig_i < 1, orig_i = 1; end
+        if orig_j < 1, orig_j = 1; end
+        for k = 1:c1
+            imagemCombinada(i,j,k) = lena(orig_i, orig_j, k);
+        end
+    end
+end
+
+% Preencher a segunda parte com pixels da segunda imagem (redimensionando manualmente)
+for i = 1:alturaNova
+    for j = 1:larguraNova2
+        orig_i = round(i * (h2 / alturaNova));
+        orig_j = round(j * (w2 / larguraNova2));
+        if orig_i < 1, orig_i = 1; end
+        if orig_j < 1, orig_j = 1; end
+        for k = 1:c2
+            imagemCombinada(i, j + larguraNova1, k) = cameraman(orig_i, orig_j, k);
+        end
+    end
+end
+
+% Exibir a imagem combinada
+figure;
+imshow(imagemCombinada);
+title('Imagem Combinada - Redimensionamento Manual');
