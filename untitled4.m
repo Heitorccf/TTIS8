@@ -1,5 +1,5 @@
 % Ler a imagem original
-imagemOriginal = imread('Imagens/if.jpg');
+imagemOriginal = imread('Imagens/fotoIF.jpg');
 
 % Converter a imagem para tons de cinza
 imagemCinza = rgb2gray(imagemOriginal);

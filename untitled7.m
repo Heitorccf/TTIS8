@@ -1,5 +1,5 @@
 % Carregar a imagem
-img = imread('Imagens/lena.bmp');
+img = imread('Imagens/Libras.bmp');
 
 % Definir o retângulo de corte [x, y, largura, altura]
 retanguloCorte = [100, 100, 200, 200]; % Ajuste os valores conforme necessário

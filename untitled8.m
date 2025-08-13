@@ -1,5 +1,5 @@
-% Carregar a imagem Lena
-img = imread('Imagens/lena.bmp');
+% Carregar a imagem...
+img = imread('Imagens/Libras.bmp');
 
 % Criar a imagem negativa
 img_negativo = imcomplement(img);

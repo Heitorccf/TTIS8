@@ -1,5 +1,5 @@
 % Ler as imagens
-lena = imread('Imagens/lenaMenor.bmp');
+lena = imread('Imagens/Libras.bmp');
 cameraman = imread('Imagens/cameraman.bmp');
 
 % Obter dimensões das imagens originais
