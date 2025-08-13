@@ -1,6 +1,7 @@
 % Ler a imagem
 img = imread('Imagens/libras.jpg');
 
+
 % Exibir a imagem original
 figure;
 imshow(img);

@@ -11,7 +11,6 @@ imagemCinzaRedimensionada = imresize(imagemCinza, 0.7);
 % Exibir as imagens com títulos
 figure;
 
-% Exibir as imagens
 subplot(2, 2, 1);
 imshow(imagemOriginal);
 title('Imagem Original');
