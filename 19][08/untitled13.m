@@ -2,13 +2,13 @@ clear all;
 close all;
 clc;
 
-imgOriginal = imread('Imagens/imgRuido.png');
+imgOriginal = imread('Imagens/...');
 
 [M, N] = size(imgOriginal);
 
 c = double(imgOriginal);
 
-% ---------- Função QuickSort ----------
+% ---------- Função Quick-Sort ----------
 function sortedArray = quickSort(array)
     if length(array) <= 1
         sortedArray = array;
