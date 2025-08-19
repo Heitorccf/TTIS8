@@ -1,0 +1,49 @@
+clear all;
+close all;
+clc;
+
+imgOriginal = imread('Imagens/imgRuido.png');
+
+[M, N] = size(imgOriginal);
+
+c = double(imgOriginal);
+
+% Quick Sort function
+function sortedArray = quickSort(array)
+    if length(array) <= 1
+        sortedArray = array;
+    else
+        pivot = array(end);
+        left = array(array < pivot);
+        right = array(array > pivot);
+        sortedArray = [quickSort(left), pivot, quickSort(right)];
+    end
+end
+
+for i = 2:M-1
+    for j = 2:N-1
+        neighborhood = [
+            c(i-1, j-1), c(i-1, j), c(i-1, j+1), ...
+            c(i, j-1),   c(i, j),   c(i, j+1), ...
+            c(i+1, j-1), c(i+1, j), c(i+1, j+1)
+        ];
+        sortedNeighborhood = quickSort(neighborhood);
+        c(i, j) = sortedNeighborhood(5); % Median value
+    end
+end
+for i = 2:M-1
+    for j = 2:N-1
+        
+        % (3x3)
+        c(i, j) = (1/9) * ( ...
+                    c(i-1, j-1) + c(i-1, j) + c(i-1, j+1) + ...
+                    c(i, j-1)   + c(i, j)   + c(i, j+1)   + ...
+                    c(i+1, j-1) + c(i+1, j) + c(i+1, j+1) );
+    end
+end
+
+imgProcessed = uint8(c);
+
+figure;
+subplot(1, 2, 1), imshow(imgOriginal), title('Imagem com ruído');
+subplot(1, 2, 2), imshow(imgProcessed), title('Imagem processada');
