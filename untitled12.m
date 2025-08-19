@@ -8,11 +8,10 @@ imgOriginal = imread('Imagens/imgRuido.png');
 
 c = double(imgOriginal);
 
-% Percorre os pixels da imagem (ignorando as bordas)
 for i = 2:M-1
     for j = 2:N-1
         
-        % Calcula a média dos 9 pixels da vizinhança (filtro da média 3x3)
+        % (3x3)
         c(i, j) = (1/9) * ( ...
                     c(i-1, j-1) + c(i-1, j) + c(i-1, j+1) + ...
                     c(i, j-1)   + c(i, j)   + c(i, j+1)   + ...
